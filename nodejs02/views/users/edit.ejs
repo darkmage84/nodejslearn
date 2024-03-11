@@ -1,0 +1,49 @@
+<h1>Sửa thông tin người dùng</h1>
+
+<%   if (msgEditSuccess?.length) { %>
+<div class="alert alert-success mt-3"><%= msgEditSuccess %></div>
+<% } %>
+
+<form action="" method="post">
+  <div class="mb-3">
+    <label for="name">Tên người dùng: </label>
+    <input
+      type="text"
+      name="name"
+      value="<%- req.old?.name %>"
+      class="form-control"
+      placeholder="Tên .."
+    />
+    <%- req.errors?.name ? `<span class="text-danger">${req.errors?.name}</span
+    >` : '' %>
+  </div>
+
+  <div class="mb-3">
+    <label for="email">Email: </label>
+    <input
+      type="text"
+      name="email"
+      value="<%- req.old?.email %>"
+      class="form-control"
+      placeholder="Email .."
+    />
+    <%- req.errors?.email ? `<span class="text-danger"
+      >${req.errors?.email}</span
+    >` : '' %>
+  </div>
+
+  <div class="mb-3">
+    <label for="status">Trạng thái:</label>
+    <select name="status" class="form-select">
+      <option value="0" <%- req.old?.status === '0' ? 'selected' : '' %>>Chưa kích hoạt</option>
+      <option value="1" <%- req.old?.status === '1' ? 'selected' : '' %>>Kích hoạt</option>
+    </select>
+  </div>
+
+  <button class="btn btn-primary">Lưu</button>
+  <a href="/users" class="btn btn-danger">Hủy</a>
+</form>
+
+<div class="col-3 mb-3 mt-3">
+  <a href="/users" class="btn btn-secondary"><-</a>
+</div>

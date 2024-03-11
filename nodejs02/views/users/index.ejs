@@ -1,0 +1,64 @@
+<h1>Danh sách người dùng</h1>
+
+<div class="col-3 mb-3">
+  <a href="/users/add" class="btn btn-primary">Thêm người dùng</a>
+</div>
+
+<form action="">
+  <div class="row">
+    <div class="col-3">
+      <select name="status" class="form-select" id="">
+        <option value="all">Tất cả</option>
+        <option value="active" <%= status === 'active' ? 'selected' : '' %>>Kích hoạt</option>
+        <option value="inactive" <%= status === 'inactive' ? 'selected' : '' %>>Chưa kích hoạt</option>
+      </select>
+    </div>
+
+    <div class="col-7">
+      <input type="search" name="keyword" class="form-control" value="<%= keyword %>" placeholder="Từ khóa tìm kiếm ..." />
+    </div>
+
+    <div class="col-2 d-grid">
+      <button>Tìm kiếm</button>
+    </div>
+  </div>
+</form>
+
+<% if (msgAddSuccess?.length) { %>
+  <div class="alert alert-success mt-3"><%= msgAddSuccess %></div>
+<% } %>
+
+<table class="table table-bordered mt-3">
+  <tr>
+    <th width="5%">STT</th>
+    <th>Tên</th>
+    <th>Email</th>
+    <th>Trạng thái</th>
+    <th>Thời gian tạo</th>
+    <th width="5%">Sửa</th>
+    <th width="5%">Xóa</th>
+  </tr>
+
+  <% users.forEach(({id, name, email, status, created_at: createdAt}, index) =>
+  { %>
+  <tr>
+    <td><%= index+1 %></td>
+    <td><%= name %></td>
+    <td><%= email %></td>
+    <td><%= status ? 'Đã kích hoạt' : 'Chưa kích hoạt' %></td>
+    <td><%= moment(createdAt).format('HH:mm:ss DD/MM/YYYY') %></td>
+    <td>
+      <a href="/users/edit/<%= id %>" class="btn btn-warning">Sửa</a>
+    </td>
+    <td>
+      <form action="/users/delete/<%= id %>" method="post" onsubmit="return confirm('Bạn có chắc chắn?')">
+        <button class="btn btn-danger">Xóa</button>
+      </form>
+    </td>
+  </tr>
+  <% }) %>
+</table>
+
+<div class="col-3 mb-3 mt-3">
+  <a href="/" class="btn btn-dark">HOME PAGE</a>
+</div>

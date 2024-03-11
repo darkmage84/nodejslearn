@@ -1,0 +1,18 @@
+<h1>HOME PAGE</h1>
+<h2>Day la Index.ejs trong folder Home trong folder Views</h2>
+
+<!-- khong nen comment -->
+<!-- <h2><%= title %></h2> -->
+<!-- <h2><%- title %></h2> -->
+
+<% if (check) { %>
+<h2><%- title %></h2>
+<% } %>
+<hr />
+
+<% usersArr.forEach((item)=>{ %>
+<h3><%= item %></h3>
+<% }) %>
+<hr />
+
+<%- include('./banner.ejs', {title2:title}) %>
